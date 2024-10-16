@@ -5,7 +5,7 @@ import surveyRoutes from './routes/SurveyRoutes.js'; // Adjusted import for your
 import connectDB from './config/db.js'; // Import the connection function
 
 const app = express();
-const PORT = 5003;
+const PORT = process.env.PORT || 5003;
 
 // Middleware
 app.use(cors());
@@ -13,6 +13,10 @@ app.use(express.json()); // To parse JSON body
 
 // Connect to MongoDB
 connectDB(); // Call the connection function to connect to the database
+
+app.get('/', (req, res) => {
+    res.send('Server is running!'); // Responds with a simple message
+});
 
 // Use survey routes
 app.use('/api', surveyRoutes); // Add survey routes under the /api prefix

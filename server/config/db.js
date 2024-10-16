@@ -1,6 +1,10 @@
 import mongoose from 'mongoose';
+import dotenv from 'dotenv'; // Import dotenv
 
-const uri = 'mongodb+srv://ali_kefel:3unice%40rtus@hse-survey.l3dg1.mongodb.net/SurveyResults?retryWrites=true&w=majority&appName=HSE-Survey';
+
+dotenv.config(); // Load environment variables from a .env file
+
+const uri = process.env.MONGODB_URI; // Get the URI from the environment variables
 
 const connectDB = async () => {
   try {

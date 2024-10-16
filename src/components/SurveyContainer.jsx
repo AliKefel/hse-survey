@@ -14,7 +14,7 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
     try {
         console.log('Sending data to API...');
 
-        const response = await fetch('http://localhost:5003/api/survey-results', {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/survey-results`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

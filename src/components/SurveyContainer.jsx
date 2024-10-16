@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import SurveyA from '../components/SurveyA';
 import SurveyB from '../components/SurveyB';
 import SurveyC from '../components/SurveyC';
-import { set } from 'mongoose';
 
 function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
   const [buttonClicks, setButtonClicks] = useState(0);
@@ -12,37 +11,50 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
 
   const handleSurveyCompletion = async () => {
     try {
-        console.log('Sending data to API...');
+      console.log('Sending data to API...');
 
-        const response = await fetch(`${REACT_APP_API_URL}/survey-results`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                participantId: participantId,
-                surveyId: surveyOrder[currentSurveyIndex],
-                buttonClicks: buttonClicks, // ensure this variable is defined
-                money: money,
-            }),
-        });
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/survey-results`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          participantId: participantId,
+          surveyId: surveyOrder[currentSurveyIndex],
+          buttonClicks: buttonClicks, // ensure this variable is defined
+          money: money,
+        }),
+      });
 
-        console.log('Response:', response);
+      console.log('Response:', response);
 
-        if (!response.ok) {
-            const errorResponse = await response.json();
-            console.error('Error details:', errorResponse);
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
+      if (!response.ok) {
+        const errorResponse = await response.json();
+        console.error('Error details:', errorResponse);
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
-        const data = await response.json();
-        console.log('Survey result saved successfully:', data);
+      const data = await response.json();
+      console.log('Survey result saved successfully:', data);
     } catch (error) {
-        console.error('Error sending data:', error);
+      console.error('Error sending data:', error);
     }
-    setCurrentSurveyIndex((prevIndex) => prevIndex + 1);
-};
 
+    // Move to the next survey or handle completion
+    setCurrentSurveyIndex((prevIndex) => {
+      const nextIndex = prevIndex + 1;
+      // Check if we have more surveys
+      if (nextIndex < surveyOrder.length) {
+        return nextIndex;
+      } else {
+        // All surveys completed
+        console.log('All surveys completed');
+        // You can navigate to a completion page or show a message
+        navigate('/completion'); // Change to your desired route
+        return prevIndex; // Prevent index overflow
+      }
+    });
+  };
 
   const renderSurvey = () => {
     const surveyId = surveyOrder[currentSurveyIndex];

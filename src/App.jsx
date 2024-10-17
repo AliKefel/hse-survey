@@ -9,11 +9,12 @@ function App() {
     const [surveyOrder, setSurveyOrder] = useState([]);
     const [currentSurveyIndex, setCurrentSurveyIndex] = useState(0);
     const [money, setMoney] = useState(200); // Initialize money state
+    const navigate = useNavigate();
 
-    // Function to handle participant submission
     const handleParticipantSubmit = () => {
-        const order = surveyOrderData[participantNumber]?.surveyOrder;
 
+        const order = surveyOrderData[participantNumber]?.surveyOrder;
+        
         console.log('Order:', order);
         console.log('Participant Number:', participantNumber);
 
@@ -21,11 +22,38 @@ function App() {
             setSurveyOrder(order);
             setCurrentSurveyIndex(0); // Set to the first survey index
             // Redirect to the first survey in their order
-            navigate(`/survey/${order[0]}`);
+            navigate(/survey/${order[0]});
         } else {
             alert('Invalid Participant Number');
         }
     };
+
+    // Function to navigate to the next survey
+    const nextSurvey = async () => {
+        // Check if there are more surveys to complete
+        if (currentSurveyIndex < surveyOrder.length - 1) {
+            // Increment the current survey index
+            const nextIndex = currentSurveyIndex + 1;
+            setCurrentSurveyIndex(nextIndex); // Update the index state
+
+            // Navigate to the next survey
+            navigate(/survey/${surveyOrder[nextIndex]});
+        } else {
+            console.log('All surveys completed');
+
+            // Handle completion logic here (e.g., show summary or redirect)
+            try {
+                const response = await axios.post(${process.env.REACT_APP_API_URL}/api/survey, {
+                    participantNumber,
+                    surveyData: { money, surveyOrder },
+                });
+                console.log('Survey data saved:', response.data);
+            } catch (error) {
+                console.error('Error saving survey data:', error);
+            }
+        }
+    };
+
 
     return (
         <div className="App">
@@ -56,9 +84,10 @@ function App() {
                         setMoney={setMoney} // Pass setMoney function to SurveyContainer
                         nextSurvey={nextSurvey} // Pass nextSurvey function for navigation
                         participantId={participantNumber} // Pass participantId (participantNumber)
-                        setCurrentSurveyIndex={setCurrentSurveyIndex} // Pass setter to manage index from SurveyContainer
+
                     />
                 } />
+
             </Routes>
         </div>
     );

@@ -30,7 +30,7 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
       console.log('Current Survey Index:', currentSurveyIndex);
       console.log('Current Survey ID:', currentSurveyId);
 
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/survey/${currentSurveyId}/survey-results`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/survey-results`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

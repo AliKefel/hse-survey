@@ -29,6 +29,8 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
       console.log('Survey Order:', surveyOrder);
       console.log('Current Survey Index:', currentSurveyIndex);
       console.log('Current Survey ID:', currentSurveyId);
+      const apiUrl = `${process.env.REACT_APP_API_URL}/api/survey-results`;
+      console.log('API URL:', apiUrl); // Log the URL to check its value
 
       const response = await fetch(`${process.env.REACT_APP_API_URL}/api/survey-results`, {
         method: 'POST',
@@ -61,7 +63,7 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
     setCurrentSurveyIndex((prevIndex) => {
       const nextIndex = prevIndex + 1;
       // Check if we have more surveys
-      if (nextIndex < surveyOrder.length) {
+      if (nextIndex <= surveyOrder.length) {
         return nextIndex;
       } else {
         // All surveys completed
@@ -86,7 +88,7 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
             setButtonClicks={setButtonClicks}
             onSubmit={handleSurveyCompletion}
             participantId={participantId} // Pass participant ID to SurveyA
-            
+
           />
         );
       case 'B':

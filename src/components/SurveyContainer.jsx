@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import SurveyA from '../components/SurveyA';
 import SurveyB from '../components/SurveyB';
@@ -9,15 +9,26 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
   const [currentSurveyIndex, setCurrentSurveyIndex] = useState(0);
   const navigate = useNavigate(); // Initialize useNavigate
 
+  // Load saved index from local storage on mount
+  useEffect(() => {
+    const savedIndex = localStorage.getItem('currentSurveyIndex');
+    if (savedIndex) {
+      setCurrentSurveyIndex(Number(savedIndex));
+    }
+  }, []);
+
+  useEffect(() => {
+    // Save current index to local storage whenever it changes
+    localStorage.setItem('currentSurveyIndex', currentSurveyIndex);
+  }, [currentSurveyIndex]);
+
   const handleSurveyCompletion = async () => {
     try {
-
       const currentSurveyId = surveyOrder[currentSurveyIndex]; // Get the current survey ID
       console.log('Sending data to API...');
       console.log('Survey Order:', surveyOrder);
       console.log('Current Survey Index:', currentSurveyIndex);
       console.log('Current Survey ID:', currentSurveyId);
-
 
       const response = await fetch(`${process.env.REACT_APP_API_URL}/survey/${currentSurveyId}/survey-results`, {
         method: 'POST',
@@ -26,7 +37,7 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
         },
         body: JSON.stringify({
           participantId: participantId,
-          surveyId: surveyOrder[currentSurveyIndex],
+          surveyId: currentSurveyId,
           buttonClicks: buttonClicks, // ensure this variable is defined
           money: money,
         }),

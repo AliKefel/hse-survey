@@ -22,9 +22,10 @@ function App() {
             setSurveyOrder(order);
             setCurrentSurveyIndex(0); // Set to the first survey index
             // Redirect to the first survey in their order
+            const firstSurveyUrl = `/survey/${order[0]}`;
             console.log('Navigating to:', firstSurveyUrl); // Log the URL
-
-            navigate(`/survey/${order[0]}`);
+            // Redirect to the first survey in their order
+            navigate(firstSurveyUrl);
         } else {
             alert('Invalid Participant Number');
         }

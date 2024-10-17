@@ -9,17 +9,7 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
   const [currentSurveyIndex, setCurrentSurveyIndex] = useState(0);
   const navigate = useNavigate(); // Initialize useNavigate
 
-  // Load saved index from local storage on mount
-  useEffect(() => {
-    const savedIndex = localStorage.getItem('currentSurveyIndex');
-    if (savedIndex) {
-      setCurrentSurveyIndex(Number(savedIndex));
-    }
-  }, []);
 
-  useEffect(() => {
-    localStorage.setItem('currentSurveyIndex', currentSurveyIndex);
-  }, [currentSurveyIndex]);
 
   const handleSurveyCompletion = async () => {
     try {
@@ -30,7 +20,7 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
       console.log('Current Survey Index:', currentSurveyIndex);
       console.log('Current Survey ID:', currentSurveyId);
 
-      const apiUrl = `${process.env.REACT_APP_API_URL}/api/survey-results`;
+      const apiUrl = `${process.env.REACT_APP_API_URL}/survey-results`;
       console.log('API URL:', apiUrl); // Log the URL to check its value
 
       const response = await fetch(apiUrl, {
@@ -79,6 +69,7 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
     // Check if surveyOrder is empty or undefined
     if (!surveyOrder || surveyOrder.length === 0) {
       return <div>Loading...</div>; // Handle the case where the surveyOrder is empty
+      console.log('Survey Order empty :', surveyOrder);
     }
 
     const surveyId = surveyOrder[currentSurveyIndex];

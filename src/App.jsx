@@ -5,11 +5,13 @@ import surveyOrderData from './surveyOrder.json';
 import axios from 'axios';
 
 function App() {
+
     const [participantNumber, setParticipantNumber] = useState('');
     const [surveyOrder, setSurveyOrder] = useState([]);
     const [currentSurveyIndex, setCurrentSurveyIndex] = useState(0);
     const [money, setMoney] = useState(200); // Initialize money state
     const navigate = useNavigate();
+    
 
     const handleParticipantSubmit = () => {
 

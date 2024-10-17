@@ -22,7 +22,7 @@ function App() {
             setSurveyOrder(order);
             setCurrentSurveyIndex(0); // Set to the first survey index
             // Redirect to the first survey in their order
-            navigate(/survey/${order[0]});
+            navigate(`/survey/${order[0]}`);
         } else {
             alert('Invalid Participant Number');
         }
@@ -37,13 +37,13 @@ function App() {
             setCurrentSurveyIndex(nextIndex); // Update the index state
 
             // Navigate to the next survey
-            navigate(/survey/${surveyOrder[nextIndex]});
+            navigate(`/survey/${surveyOrder[nextIndex]}`);
         } else {
             console.log('All surveys completed');
 
             // Handle completion logic here (e.g., show summary or redirect)
             try {
-                const response = await axios.post(${process.env.REACT_APP_API_URL}/api/survey, {
+                const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/survey`, {
                     participantNumber,
                     surveyData: { money, surveyOrder },
                 });

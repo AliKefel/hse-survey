@@ -16,7 +16,8 @@ router.post('/survey-results', async (req, res) => {
     });
     await surveyResult.save();
     res.status(201).json({ message: 'Survey result saved successfully!' });
-  } catch (error) {
+  }
+  catch (error) {
     console.error('Error saving survey result:', error); // Added logging for debugging
     res.status(500).json({ message: 'Error saving survey result.', error: error.message });
   }

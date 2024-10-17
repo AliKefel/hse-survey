@@ -10,7 +10,6 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
   const navigate = useNavigate(); // Initialize useNavigate
 
 
-
   const handleSurveyCompletion = async () => {
     try {
       const currentSurveyId = surveyOrder[currentSurveyIndex]; // Get the current survey ID
@@ -21,6 +20,7 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
       console.log('Current Survey ID:', currentSurveyId);
 
       const apiUrl = `${process.env.REACT_APP_API_URL}/survey-results`;
+      
       console.log('API URL:', apiUrl); // Log the URL to check its value
 
       const response = await fetch(apiUrl, {

@@ -11,7 +11,7 @@ function App() {
     const [currentSurveyIndex, setCurrentSurveyIndex] = useState(0);
     const [money, setMoney] = useState(200); // Initialize money state
     const navigate = useNavigate();
-    
+
 
     const handleParticipantSubmit = () => {
 
@@ -40,14 +40,13 @@ function App() {
             // Increment the current survey index
             const nextIndex = currentSurveyIndex + 1;
             setCurrentSurveyIndex(nextIndex); // Update the index state
-
             // Navigate to the next survey
             navigate(`/survey/${surveyOrder[nextIndex]}`);
         } else {
             console.log('All surveys completed');
             // Handle completion logic here (e.g., show summary or redirect)
             try {
-                const response = await axios.post(`/api/survey-results`, {
+                const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/survey-results`, {
                     participantNumber,
                     surveyData: { money, surveyOrder },
                 });

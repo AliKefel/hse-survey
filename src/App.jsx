@@ -3,12 +3,10 @@ import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-route
 import SurveyContainer from './components/SurveyContainer';
 import surveyOrderData from './surveyOrder.json';
 import axios from 'axios';
-import dotenv from 'dotenv'; // Import dotenv
+
 
 
 function App() {
-
-    dotenv.config(); // Load environment variables from a .env file
 
 
     const [participantNumber, setParticipantNumber] = useState('');

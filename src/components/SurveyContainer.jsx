@@ -19,7 +19,8 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
       console.log('Current Survey Index:', currentSurveyIndex);
       console.log('Current Survey ID:', currentSurveyId);
 
-      const apiUrl = `${process.env.REACT_APP_API_URL}/survey-results`;
+      const apiUrl = `${import.meta.env.VITE_API_URL}/api/survey-results`;
+
 
       console.log('API URL:', apiUrl); // Log the URL to check its value
       const response = await fetch(apiUrl, {

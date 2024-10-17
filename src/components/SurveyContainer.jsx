@@ -19,7 +19,7 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
       console.log('Current Survey Index:', currentSurveyIndex);
       console.log('Current Survey ID:', currentSurveyId);
 
-      const apiUrl = `${import.meta.env.VITE_API_URL}/api/survey-results`;
+      const apiUrl = `${import.meta.env.VITE_API_URL}/survey-results`;
 
 
       console.log('API URL:', apiUrl); // Log the URL to check its value

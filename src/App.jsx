@@ -22,6 +22,8 @@ function App() {
             setSurveyOrder(order);
             setCurrentSurveyIndex(0); // Set to the first survey index
             // Redirect to the first survey in their order
+            console.log('Navigating to:', firstSurveyUrl); // Log the URL
+
             navigate(`/survey/${order[0]}`);
         } else {
             alert('Invalid Participant Number');

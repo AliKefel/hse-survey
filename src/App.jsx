@@ -45,7 +45,7 @@ function App() {
             console.log('All surveys completed');
             // Handle completion logic here (e.g., show summary or redirect)
             try {
-                const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/survey-results`, {
+                const response = await axios.post(`/api/survey-results`, {
                     participantNumber,
                     surveyData: { money, surveyOrder },
                 });

@@ -67,33 +67,33 @@ function SurveyA({ onSubmit, money, setMoney, buttonClicks, setButtonClicks }) {
 
     // onSubmit({ buttonClicks, money }); // Uncomment this line when ready to submit
   };
-
+  
   const handleOption = (selectedOption) => {
     setOption(selectedOption); // Set selected option
   };
 
   return (
-    <div className="p-4 bg-gray-100 rounded-xl w-full h-full border-green-600 border-2">
-      <div className="flex justify-between items-center mb-4 border-4">
+    <div className="p-4  rounded-xl w-full  ">
+      <div className="flex justify-between items-center mb-4 ">
         <h1 className="text-xl font-bold text-black">Survey A</h1>
-        <p className="text-black">Money Left: ${money}</p>
+        <p className="text-black font-bold text-lg">Money Left: ${ money}</p>
       </div>
 
-      <span className="text-black text-xl items-center flex border-2">
+      <span className="text-black text-xl items-center flex border-2 border-black rounded-md p-5 ">
         Scenario: This survey is in the context of yourself 
       </span>
 
-      <div className='flex flex-row'> 
-        <span className="text-black font-bold text-xl items-center flex border-2">
+      <div className='flex flex-row pt-4'> 
+        <span className="text-black font-bold text-xl items-center flex ">
           Content from chatbot: 
         </span>
-        <span className="text-black text-xl items-center flex border-2">{chatBotContent}</span>
+        <span className="text-black text-xl items-center flex ">{chatBotContent}</span>
 
       </div>
-      <div className="flex justify-center space-x-2 border-2">
+      <div className="flex justify-center space-x-2 pt-4">
         <button
           onClick={handleClick}
-          className="bg-blue-500 text-black px-4 py-2 rounded hover:bg-blue-600 mt-4"
+          className="bg-blue-600  mt-4 hover:bg-blue-500 text-white font-bold py-2 px-4 border-b-4 border-blue-800 hover:border-blue-500 rounded"
         >
           Click for more information, cost: $
           {clickCount < 3
@@ -104,16 +104,16 @@ function SurveyA({ onSubmit, money, setMoney, buttonClicks, setButtonClicks }) {
         </button>
       </div>
 
-      <div className="flex justify-center space-x-2 border-2 mt-6">
+      <div className="flex justify-center space-x-2 mt-2">
         <button 
           onClick={() => handleOption(1)} 
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-300"
+          className=" bg-blue-600  mt-4 hover:bg-blue-500 text-white font-bold py-2 px-4 border-b-4 border-blue-800 hover:border-blue-500 rounded"
         >
           Option A
         </button>
         <button 
           onClick={() => handleOption(2)} 
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-300"
+          className="bg-blue-600  mt-4 hover:bg-blue-500 text-white font-bold py-2 px-4 border-b-4 border-blue-800 hover:border-blue-500 rounded"
         >
           Option B
         </button>

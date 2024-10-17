@@ -8,10 +8,13 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
   const [buttonClicks, setButtonClicks] = useState(0);
   const [currentSurveyIndex, setCurrentSurveyIndex] = useState(0);
   const navigate = useNavigate(); // Initialize useNavigate
+  const [loading, setLoading] = useState(false); // Add loading state
+
 
 
   const handleSurveyCompletion = async () => {
     try {
+      setLoading(true); // Set loading to true
       const currentSurveyId = surveyOrder[currentSurveyIndex]; // Get the current survey ID
 
       console.log('Sending data to API...');
@@ -20,7 +23,6 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
       console.log('Current Survey ID:', currentSurveyId);
 
       const apiUrl = `${import.meta.env.VITE_API_URL}/survey-results`;
-
 
       console.log('API URL:', apiUrl); // Log the URL to check its value
       const response = await fetch(apiUrl, {
@@ -46,19 +48,26 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
 
       const data = await response.json();
       console.log('Survey result saved successfully:', data);
+
     } catch (error) {
       console.error('Error sending data:', error);
     }
+    setMoney(200); // Reset money to 200
+    setButtonClicks(0); // Reset button clicks to 0
 
     // Move to the next survey or handle completion
     setCurrentSurveyIndex((prevIndex) => {
       const nextIndex = prevIndex + 1;
       // Check if we have more surveys
       if (nextIndex < surveyOrder.length) {
+        setLoading(false); // End loading before moving to next survey
+
         return nextIndex;
       } else {
         // All surveys completed
         console.log('All surveys completed');
+        setLoading(false); // End loading before moving to next survey
+
         navigate('/completion'); // Change to your desired route
         return prevIndex; // Prevent index overflow
       }
@@ -66,6 +75,14 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
   };
 
   const renderSurvey = () => {
+
+    while (loading) {
+      return (
+        <div className='text-black flex justify-center items-center font-xl font-bold'>Loading...</div> // Show loading spinner/message
+
+      )
+      
+    }
     // Check if surveyOrder is empty or undefined
     if (!surveyOrder || surveyOrder.length === 0) {
       return <div>Loading...</div>; // Handle the case where the surveyOrder is empty
@@ -114,8 +131,8 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
   };
 
   return (
-    <div className="w-screen h-screen flex justify-center bg-gray-700">
-      <div className="border-2 border-red-600 p-4 bg-white shadow-lg mt-8 rounded-lg w-3/4 h-1/2">
+    <div className="w-screen h-screen flex justify-center " style={{backgroundColor: "#33219c"}}>
+      <div className="border-8 border-black  p-4 bg-white shadow-lg mt-8 rounded-lg w-3/4 h-fit">
         {renderSurvey()}
       </div>
     </div>

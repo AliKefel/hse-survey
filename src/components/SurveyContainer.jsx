@@ -18,17 +18,18 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
   }, []);
 
   useEffect(() => {
-    // Save current index to local storage whenever it changes
     localStorage.setItem('currentSurveyIndex', currentSurveyIndex);
   }, [currentSurveyIndex]);
 
   const handleSurveyCompletion = async () => {
     try {
       const currentSurveyId = surveyOrder[currentSurveyIndex]; // Get the current survey ID
+
       console.log('Sending data to API...');
       console.log('Survey Order:', surveyOrder);
       console.log('Current Survey Index:', currentSurveyIndex);
       console.log('Current Survey ID:', currentSurveyId);
+
       const apiUrl = `${process.env.REACT_APP_API_URL}/api/survey-results`;
       console.log('API URL:', apiUrl); // Log the URL to check its value
 

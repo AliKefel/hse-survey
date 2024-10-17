@@ -28,16 +28,20 @@ function App() {
 
     // Function to navigate to the next survey
     const nextSurvey = async () => {
-
+        // Check if there are more surveys to complete
         if (currentSurveyIndex < surveyOrder.length - 1) {
-            setCurrentSurveyIndex(prevIndex => prevIndex + 1);
-            navigate(`/survey/${surveyOrder[currentSurveyIndex + 1]}`);
-        }
-        else {
+            // Increment the current survey index
+            const nextIndex = currentSurveyIndex + 1;
+            setCurrentSurveyIndex(nextIndex); // Update the index state
+
+            // Navigate to the next survey
+            navigate(`/survey/${surveyOrder[nextIndex]}`);
+        } else {
             console.log('All surveys completed');
+
             // Handle completion logic here (e.g., show summary or redirect)
             try {
-                const response = await axios.post('/api/survey', {
+                const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/survey`, {
                     participantNumber,
                     surveyData: { money, surveyOrder },
                 });
@@ -47,6 +51,7 @@ function App() {
             }
         }
     };
+
 
     return (
         <div className="App">

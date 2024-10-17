@@ -86,6 +86,7 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
             setButtonClicks={setButtonClicks}
             onSubmit={handleSurveyCompletion}
             participantId={participantId} // Pass participant ID to SurveyA
+            
           />
         );
       case 'B':

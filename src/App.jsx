@@ -9,12 +9,11 @@ function App() {
     const [surveyOrder, setSurveyOrder] = useState([]);
     const [currentSurveyIndex, setCurrentSurveyIndex] = useState(0);
     const [money, setMoney] = useState(200); // Initialize money state
-    const navigate = useNavigate();
 
+    // Function to handle participant submission
     const handleParticipantSubmit = () => {
-
         const order = surveyOrderData[participantNumber]?.surveyOrder;
-        
+
         console.log('Order:', order);
         console.log('Participant Number:', participantNumber);
 
@@ -27,33 +26,6 @@ function App() {
             alert('Invalid Participant Number');
         }
     };
-
-    // Function to navigate to the next survey
-    const nextSurvey = async () => {
-        // Check if there are more surveys to complete
-        if (currentSurveyIndex < surveyOrder.length - 1) {
-            // Increment the current survey index
-            const nextIndex = currentSurveyIndex + 1;
-            setCurrentSurveyIndex(nextIndex); // Update the index state
-
-            // Navigate to the next survey
-            navigate(`/survey/${surveyOrder[nextIndex]}`);
-        } else {
-            console.log('All surveys completed');
-
-            // Handle completion logic here (e.g., show summary or redirect)
-            try {
-                const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/survey`, {
-                    participantNumber,
-                    surveyData: { money, surveyOrder },
-                });
-                console.log('Survey data saved:', response.data);
-            } catch (error) {
-                console.error('Error saving survey data:', error);
-            }
-        }
-    };
-
 
     return (
         <div className="App">
@@ -84,7 +56,75 @@ function App() {
                         setMoney={setMoney} // Pass setMoney function to SurveyContainer
                         nextSurvey={nextSurvey} // Pass nextSurvey function for navigation
                         participantId={participantNumber} // Pass participantId (participantNumber)
+                        setCurrentSurveyIndex={setCurrentSurveyIndex} // Pass setter to manage index from SurveyContainer
+                    />
+                } />
+            </Routes>
+        </div>
+    );
+}
 
+const SurveyContainer = ({ surveyOrder, currentSurveyIndex, money, setMoney, nextSurvey, participantId, setCurrentSurveyIndex }) => {
+    const navigate = useNavigate();
+
+    // Function to navigate to the next survey
+    const handleNextSurvey = async () => {
+        // Check if there are more surveys to complete
+        if (currentSurveyIndex < surveyOrder.length - 1) {
+            // Increment the current survey index
+            const nextIndex = currentSurveyIndex + 1;
+            setCurrentSurveyIndex(nextIndex); // Update the index state
+
+            // Navigate to the next survey
+            navigate(`/survey/${surveyOrder[nextIndex]}`);
+        } else {
+            console.log('All surveys completed');
+
+            // Handle completion logic here (e.g., show summary or redirect)
+            try {
+                const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/survey`, {
+                    participantNumber: participantId,
+                    surveyData: { money, surveyOrder },
+                });
+                console.log('Survey data saved:', response.data);
+                // Redirect or show a completion message
+                navigate('/'); // Redirect to home or another page
+            } catch (error) {
+                console.error('Error saving survey data:', error);
+                alert('Error saving survey data. Please try again.');
+            }
+        }
+    };
+    
+    return (
+        <div className="App">
+            <Routes>
+                <Route path="/" element={
+                    <div className="participant-input-page w-screen h-screen flex justify-center items-center bg-gray-700">
+                        <div className="p-4 bg-white rounded-xl w-1/2">
+                            <h1 className="text-xl font-bold text-black mb-4">Enter Your Participant Number</h1>
+                            <input
+                                type="text"
+                                value={participantNumber}
+                                onChange={(e) => setParticipantNumber(e.target.value)}
+                                className="border-2 p-2 rounded w-full mb-4"
+                                placeholder="Participant Number"
+                            />
+                            <button onClick={handleParticipantSubmit} className="bg-blue-500 text-white p-2 rounded w-full">
+                                Submit
+                            </button>
+                        </div>
+                    </div>
+                } />
+
+                <Route path="/survey/:surveyId" element={
+                    <SurveyContainer
+                        surveyOrder={surveyOrder}
+                        currentSurveyIndex={currentSurveyIndex}
+                        money={money}       // Pass money state to SurveyContainer
+                        setMoney={setMoney} // Pass setMoney function to SurveyContainer
+                        nextSurvey={nextSurvey} // Pass nextSurvey function for navigation
+                        participantId={participantNumber} // Pass participantId (participantNumber)
                     />
                 } />
 

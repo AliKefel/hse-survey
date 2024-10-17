@@ -11,11 +11,15 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
 
   const handleSurveyCompletion = async () => {
     try {
+
+      const currentSurveyId = surveyOrder[currentSurveyIndex]; // Get the current survey ID
       console.log('Sending data to API...');
       console.log('Survey Order:', surveyOrder);
       console.log('Current Survey Index:', currentSurveyIndex);
+      console.log('Current Survey ID:', currentSurveyId);
 
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/survey-results`, {
+
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/survey/${currentSurveyId}/survey-results`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -60,6 +64,7 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
 
   const renderSurvey = () => {
     const surveyId = surveyOrder[currentSurveyIndex];
+
     switch (surveyId) {
       case 'A':
         return (

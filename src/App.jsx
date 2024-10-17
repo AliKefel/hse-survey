@@ -27,10 +27,12 @@ function App() {
 
     // Function to navigate to the next survey
     const nextSurvey = async () => {
+
         if (currentSurveyIndex < surveyOrder.length - 1) {
             setCurrentSurveyIndex(prevIndex => prevIndex + 1);
             navigate(`/survey/${surveyOrder[currentSurveyIndex + 1]}`);
-        } else {
+        }
+        else {
             console.log('All surveys completed');
             // Handle completion logic here (e.g., show summary or redirect)
             try {

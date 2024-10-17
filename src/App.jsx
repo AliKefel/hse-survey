@@ -58,7 +58,9 @@ function App() {
 
 
     return (
+        <Router>
         <div className="App">
+
             <Routes>
                 <Route path="/" element={
                     <div className="participant-input-page w-screen h-screen flex justify-center items-center bg-gray-700">
@@ -92,6 +94,8 @@ function App() {
 
             </Routes>
         </div>
+        </Router>
+
     );
 }
 

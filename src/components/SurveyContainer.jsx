@@ -33,7 +33,7 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
       const apiUrl = `${process.env.REACT_APP_API_URL}/api/survey-results`;
       console.log('API URL:', apiUrl); // Log the URL to check its value
 
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/survey-results`, {
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
         body: JSON.stringify({
           participantId: participantId,
           surveyId: currentSurveyId,
-          buttonClicks: buttonClicks, // ensure this variable is defined
+          buttonClicks: buttonClicks,
           money: money,
         }),
       });
@@ -64,12 +64,11 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
     setCurrentSurveyIndex((prevIndex) => {
       const nextIndex = prevIndex + 1;
       // Check if we have more surveys
-      if (nextIndex <= surveyOrder.length) {
+      if (nextIndex < surveyOrder.length) {
         return nextIndex;
       } else {
         // All surveys completed
         console.log('All surveys completed');
-        // You can navigate to a completion page or show a message
         navigate('/completion'); // Change to your desired route
         return prevIndex; // Prevent index overflow
       }
@@ -77,11 +76,11 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
   };
 
   const renderSurvey = () => {
-
-    if (!surveyOrder.length) {
+    // Check if surveyOrder is empty or undefined
+    if (!surveyOrder || surveyOrder.length === 0) {
       return <div>Loading...</div>; // Handle the case where the surveyOrder is empty
     }
-    
+
     const surveyId = surveyOrder[currentSurveyIndex];
 
     switch (surveyId) {
@@ -94,7 +93,6 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
             setButtonClicks={setButtonClicks}
             onSubmit={handleSurveyCompletion}
             participantId={participantId} // Pass participant ID to SurveyA
-
           />
         );
       case 'B':

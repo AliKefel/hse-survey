@@ -12,6 +12,8 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
   const handleSurveyCompletion = async () => {
     try {
       console.log('Sending data to API...');
+      console.log('Survey Order:', surveyOrder);
+      console.log('Current Survey Index:', currentSurveyIndex);
 
       const response = await fetch(`${process.env.REACT_APP_API_URL}/survey-results`, {
         method: 'POST',

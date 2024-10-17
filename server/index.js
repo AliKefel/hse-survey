@@ -8,7 +8,19 @@ const app = express();
 const PORT = process.env.PORT || 5003;
 
 // Middleware
-app.use(cors());
+
+const allowedOrigins = ['https://hse-survey.vercel.app'];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+}));
+
 app.use(express.json()); // To parse JSON body
 
 // Connect to MongoDB

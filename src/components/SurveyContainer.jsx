@@ -33,7 +33,7 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
       const apiUrl = `${process.env.REACT_APP_API_URL}/api/survey-results`;
       console.log('API URL:', apiUrl); // Log the URL to check its value
 
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/survey-results`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/survey-results`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

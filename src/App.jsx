@@ -12,7 +12,9 @@ function App() {
     const navigate = useNavigate();
 
     const handleParticipantSubmit = () => {
+
         const order = surveyOrderData[participantNumber]?.surveyOrder;
+        
         console.log('Order:', order);
         console.log('Participant Number:', participantNumber);
 

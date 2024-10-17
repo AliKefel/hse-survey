@@ -3,8 +3,13 @@ import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-route
 import SurveyContainer from './components/SurveyContainer';
 import surveyOrderData from './surveyOrder.json';
 import axios from 'axios';
+import dotenv from 'dotenv'; // Import dotenv
+
 
 function App() {
+
+    dotenv.config(); // Load environment variables from a .env file
+
 
     const [participantNumber, setParticipantNumber] = useState('');
     const [surveyOrder, setSurveyOrder] = useState([]);
@@ -46,6 +51,7 @@ function App() {
             console.log('All surveys completed');
             // Handle completion logic here (e.g., show summary or redirect)
             try {
+                
                 const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/survey-results`, {
                     participantNumber,
                     surveyData: { money, surveyOrder },

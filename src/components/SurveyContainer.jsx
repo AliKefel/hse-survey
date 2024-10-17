@@ -77,6 +77,11 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
   };
 
   const renderSurvey = () => {
+
+    if (!surveyOrder.length) {
+      return <div>Loading...</div>; // Handle the case where the surveyOrder is empty
+    }
+    
     const surveyId = surveyOrder[currentSurveyIndex];
 
     switch (surveyId) {

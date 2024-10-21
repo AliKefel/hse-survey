@@ -24,12 +24,7 @@ const SurveyResultSchema = new mongoose.Schema({
   }
 }, { collection: 'SurveyResults' });
 
-// Pre-save middleware to adjust time to Arizona timezone
-SurveyResultSchema.pre('save', function (next) {
-  // Convert `submittedAt` to Arizona timezone
-  this.submittedAt = moment().tz('America/Phoenix').toDate();
-  next();
-});
+
 
 
 

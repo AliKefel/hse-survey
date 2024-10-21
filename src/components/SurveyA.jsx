@@ -4,20 +4,21 @@ function SurveyA({ onSubmit, money, setMoney, buttonClicks, setButtonClicks }) {
 
   const [transparencyLevel, setTransparencyLevel] = useState(1);
   const [clickCount, setClickCount] = useState(0);
-  const [chatBotContent, setChatBotContent] = useState("Initial content from chatbot...");
+  const [chatBotContent, setChatBotContent] = useState("Chatbot content will appear here...");
   const [option, setOption] = useState(0);
 
   const chatBotOutput = {
-    1 : "provides decision recommendation without any rationale",
-    2 : "provides decision recommendation regarding broader objective",
-    3 : "provides decision recommendation based on previous results", 
-    4 : "provides decision recommendation and key factors behind the decision",
-    5 : "provides decision recommendation, key factors behind the decision, and simplified explanation of algorithm design", 
-    6 : "provides decision recommendation, key factors behind the decision, and alternative recommendations",
-    7 : "provides all previous levels of information and inputs and weight of factors and limitations of machine", 
-    8 : "provides all previous levels of information and data source and error rate", 
-    9 : "provides all previous information and potential risks to the user"
+    1 : "ADT reccomends placing a bet on horse A.",
+    2 : "ADT reccomends placing a bet on horse A, it aligns with the bigger goal of maximizing your bet returns.",
+    3 : "ADT recommends placing a bet on horse A; it's aligned with your goal of maximizing your returns, based on the team’s previous results.", 
+    4 : "ADT recommends placing a bet on horse A; it's aligned with your goal of maximizing your returns, based on the horses’ previous results.<br /> <br />Horse A  was chosen based on recent performance trends and the jockeys stats.", 
+    5 : "ADT recommends placing a bet on horse A; it's aligned with your goal of maximizing your returns, based on the team’s previous results.<br /> <br />Horse A was chosen based on recent performance trends and the jockeys stats. ADT's algorithm studied the top 25 previous races.", 
+    6 : "ADT recommends placing a bet on horse A; it's aligned with your goal of maximizing your returns, based on the team’s previous results.<br /> <br />Horse A was chosen based on recent performance trends and the jockeys stats. ADT's algorithm studied the top 25 previous races. However, Horse B is a good alternative.",
+    7 : "ADT recommends placing a bet on horse A; it's aligned with your goal of maximizing your returns, based on the team’s previous results.<br /> <br /> Horse A was chosen based on recent performance trends and the jockeys stats. ADT's algorithm studied the top 25 previous races. However, Horse B is a good alternative.<br /><br /> ADT studied horse and jockey statics, with the horse statistic weighing heavier in the decision making process than the jockey's statistic. ADT only studies the past 100 races of the horse and the jockey. ", 
+    8 : "ADT recommends placing a bet on horse A; it's aligned with your goal of maximizing your returns, based on the team’s previous results.<br /> <br /> Horse A was chosen based on recent performance trends and the jockeys stats. ADT's algorithm studied the top 25 previous races. However, Horse B is a good alternative. <br /><br /> ADT studied horse and jockey statics, with the horse statistic weighing heavier in the decision making process than the jockey's statistic. ADT only studies the past 100 races of the horse and the jockey. Data is backed by National Horse Racing Association. ADT has an error rate of 6% in predictions.", 
+    9 : "ADT recommends placing a bet on horse A; it's aligned with your goal of maximizing your returns, based on the team’s previous results.<br /> <br /> Horse A was chosen based on recent performance trends and the jockeys stats. ADT's algorithm studied the top 25 previous races. However, Horse B is a good alternative.<br /><br /> ADT studied horse and jockey statics, with the horse statistic weighing heavier in the decision making process than the jockey's statistic. ADT only studies the past 100 races of the horse and the jockey. Data is backed by National Horse Racing Association. ADT has an error rate of 6% in predictions. Betting on the wrong horse could lead to you losing the money you bet. "
   };
+
   //  costs for each transparency level
   const costForLevel1 = 10;
   const costForLevel2 = 20;
@@ -80,20 +81,20 @@ function SurveyA({ onSubmit, money, setMoney, buttonClicks, setButtonClicks }) {
       </div>
 
       <span className="text-black text-xl items-center flex border-2 border-black rounded-md p-5 ">
-        Scenario: This survey is in the context of yourself 
+      You are about to place a bet on a horse race with the goal of maximizing your betting returns by making the best possible choice.  You've been given the option to use an Automated Decision Tool (ADT) to assist you in making your decision. ADT will provide recommendations. <br/><br/> If you click the more information, you will be given information at different levels of detail about why ADT is recommending a particular horse with more detail each time. However, each time the button is clicked you lose money. The cost of information increases as the depth of the reasoning increases.
       </span>
 
       <div className='flex flex-row pt-4'> 
         <span className="text-black font-bold text-xl items-center flex ">
           Content from chatbot: 
         </span>
-        <span className="text-black text-xl items-center flex ">{chatBotContent}</span>
+        <span className="text-black text-xl text-wrap items-center flex " dangerouslySetInnerHTML={{ __html: chatBotContent }} />
 
       </div>
       <div className="flex justify-center space-x-2 pt-4">
         <button
           onClick={handleClick}
-          className="bg-blue-600  mt-4 hover:bg-blue-500 text-white font-bold py-2 px-4 border-b-4 border-blue-800 hover:border-blue-500 rounded"
+          className="bg-gray-600  mt-4 hover:bg-gray-500 text-white font-bold py-2 px-4 border-b-4 border-gray-800 hover:border-gray-500 rounded"
         >
           Click for more information, cost: $
           {clickCount < 3
@@ -107,22 +108,22 @@ function SurveyA({ onSubmit, money, setMoney, buttonClicks, setButtonClicks }) {
       <div className="flex justify-center space-x-2 mt-2">
         <button 
           onClick={() => handleOption(1)} 
-          className=" bg-blue-600  mt-4 hover:bg-blue-500 text-white font-bold py-2 px-4 border-b-4 border-blue-800 hover:border-blue-500 rounded"
+          className=" bg-gray-600  mt-4 hover:bg-gray-500 text-white font-bold py-2 px-4 border-b-4 border-gray-800 hover:border-gray-500 rounded"
         >
-          Option A
+          Horse A
         </button>
         <button 
           onClick={() => handleOption(2)} 
-          className="bg-blue-600  mt-4 hover:bg-blue-500 text-white font-bold py-2 px-4 border-b-4 border-blue-800 hover:border-blue-500 rounded"
+          className="bg-gray-600  mt-4 hover:bg-gray-500 text-white font-bold py-2 px-4 border-b-4 border-gray-800 hover:border-gray-500 rounded"
         >
-          Option B
+          Horse B
         </button>
       </div>
 
       <div className="flex justify-center mt-4">
         <button
           onClick={handleSubmit}
-          className= {`bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 ${option === 0 ? 'opacity-50 cursor-not-allowed' : ''} `}
+          className= {`bg-black text-white px-4 py-2 rounded hover:bg-gray-600 ${option === 0 ? 'opacity-50 cursor-not-allowed' : ''} `}
           disabled={option === 0} // Disable the button until an option is selected
         >
           Submit Survey

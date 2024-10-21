@@ -74,7 +74,7 @@ function App() {
 
             <Routes>
                 <Route path="/" element={
-                    <div className="participant-input-page w-screen h-screen flex justify-center mb-20 items-start pt-14 bg-gray-700">
+                    <div className="participant-input-page w-screen h-screen flex justify-center mb-20 items-start pt-14 bg-gray-500">
                         <div className="p-4 bg-white rounded-xl w-1/2 border-8 border-black">
                             <h1 className="text-xl font-bold text-black mb-4">Enter Your Participant Number</h1>
                             <input
@@ -84,7 +84,7 @@ function App() {
                                 className="border-2 p-2 rounded w-full mb-4"
                                 placeholder="Participant Number"
                             />
-                            <button onClick={handleParticipantSubmit} className=" w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 border-b-4 border-blue-800 hover:border-blue-500 rounded" >
+                            <button onClick={handleParticipantSubmit} className=" w-full bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-4 border-b-4 border-gray-800 hover:border-gray-500 rounded" >
                                 Submit
                             </button>
                         </div>

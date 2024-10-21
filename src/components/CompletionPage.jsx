@@ -10,13 +10,13 @@ const CompletionPage = ({ participantNumber, money }) => {
     };
 
     return (
-        <div className="completion-page w-screen h-screen flex flex-col justify-center items-center " style={{backgroundColor: "#33219c"}}>
+        <div className="completion-page w-screen h-screen flex flex-col justify-center items-center bg-gray-500" >
             <div className="p-4 bg-black rounded-lg shadow-lg w-1/2 text-center">
-                <h1 className="text-2xl font-bold mb-4">Survey Complete!</h1>
+                <h1 className="text-2xl font-bold mb-4">Study Complete!</h1>
                 <p className="text-lg mb-4">
                     Thank you, Participant {participantNumber}, for completing the surveys.
                 </p>
-                <button onClick={handleFinish} className=" bg-blue-600  mt-4 w-full hover:bg-blue-500 text-white font-bold py-2 px-4 border-b-4 border-blue-800 hover:border-blue-500 rounded">
+                <button onClick={handleFinish} className=" bg-gray-600  mt-4 w-full hover:bg-gray-500 text-white font-bold py-2 px-4 border-b-4 border-gray-800 hover:border-gray-500 rounded">
                     Finish
                 </button>
             </div>

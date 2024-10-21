@@ -78,7 +78,7 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
 
     while (loading) {
       return (
-        <div className='text-black flex justify-center items-center font-xl font-bold'>Loading...</div> // Show loading spinner/message
+        <div className='text-black flex justify-center items-center font-xl font-bold'>Loading... Please wait this may take a while</div> // Show loading spinner/message
 
       )
       
@@ -131,7 +131,7 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
   };
 
   return (
-    <div className="w-screen h-screen flex justify-center " style={{backgroundColor: "#33219c"}}>
+    <div className="w-screen h-screen flex justify-center bg-gray-500 overflow-scroll" >
       <div className="border-8 border-black  p-4 bg-white shadow-lg mt-8 rounded-lg w-3/4 h-fit">
         {renderSurvey()}
       </div>

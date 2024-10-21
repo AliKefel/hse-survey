@@ -6,7 +6,7 @@ const router = express.Router();
 
 // API endpoint to save survey results
 router.post('/survey-results', async (req, res) => {
-  const { participantId, surveyId, buttonClicks, money } = req.body;
+  const { participantId, surveyId, buttonClicks, money, submittedAt } = req.body;
   try {
     const surveyResult = new SurveyResult({
       participantId,

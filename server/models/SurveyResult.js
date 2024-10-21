@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import moment from 'moment-timezone';
+
 
 const SurveyResultSchema = new mongoose.Schema({
   participantId: {
@@ -20,7 +20,7 @@ const SurveyResultSchema = new mongoose.Schema({
   },
   submittedAt: {
     type: Date,
-    default: () => moment().tz('America/Phoenix').toDate(), // Set default to Arizona time
+    default: Date.now,
   }
 }, { collection: 'SurveyResults' });
 

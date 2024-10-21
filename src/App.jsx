@@ -5,9 +5,6 @@ import surveyOrderData from './surveyOrder.json';
 import axios from 'axios';
 import CompletionPage from './components/CompletionPage';
 
-
-
-
 function App() {
 
 

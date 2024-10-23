@@ -132,7 +132,7 @@ function SurveyContainer({ surveyOrder, money, setMoney, participantId }) {
 
   return (
     <div className="w-screen h-screen flex justify-center bg-gray-500 overflow-scroll" >
-      <div className="border-8 border-black  p-4 bg-white shadow-lg mt-8 rounded-lg w-3/4 h-fit">
+      <div className="border-8 border-black  p-4 bg-white shadow-lg mt-8 rounded-lg w-3/4 h-fit mb-8">
         {renderSurvey()}
       </div>
     </div>
